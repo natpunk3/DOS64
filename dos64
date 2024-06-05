@@ -1,0 +1,123 @@
+#!/usr/bin/python3
+# DOS 64-bit
+from getpass import getpass
+import os
+import datetime
+import subprocess
+import shlex
+import directory
+
+def execute(cmd, print_output=False, errors=True):
+    '''execute() - run a system command and return its output
+        `print_output=True` if you want me to print it
+        `errors=False` if you want me to hide errors
+    '''
+
+    cmd = shlex.split(cmd)  # splits commands into arguments
+    result = subprocess.run(args=cmd, capture_output=True)
+    if result.returncode == 0:  # everything went ok
+        if print_output:
+            print(result.stdout.decode("utf8"))
+        return result.stdout
+    else:
+        if errors:
+            print(f"[!] {result.stderr.decode('utf8')}")
+        return result.stderr
+
+
+dosstart = """
+<-----DOS 64------>
+A Thing Like DOS
+Support and Contripute at:
+trip.avery@gmail.com
+<=================>
+"""
+login1 = "natpunk"
+login2 = "root"
+setuppass = "ta37"
+directory = "Home/"
+programs = "clear date logout"
+os.system("clear")
+print(r"""
+___     ___    _____
+|   \   /   \  / ___/
+|    \ Y     Y(   \_
+|  D  Y|  O  | \__  T
+|     ||     | /  \ |
+|     |l     ! \    |
+l_____j \___/   \___j 
+""")
+loginprompt = input("Login: ")
+login = "dos64"
+setup = getpass("Password: ")
+if setup == setuppass:
+    print("Approved")
+else:
+    print("Error ...")
+    exit(0)
+# loginprompt = input("Login: ")
+if loginprompt in (login1, login2):
+    print("Approved")
+else:
+    print("Error ...")
+    exit(0)
+print(dosstart)
+currentdir = "C:\\natpunk"
+prompt = ""
+drive = "C"
+#if currentdir == "":
+#    os.system("dir_home.py")
+while prompt == "" or " ":
+    prompt = input(currentdir + "> ")
+    i = 1
+    if prompt == "clear":
+        os.system("clear")
+        prompt = ""
+    elif prompt == "date":
+        execute("date", print_output=True)
+        prompt = ""
+    elif prompt == "exit":
+        print("NO CARRIER")
+        exit(0)
+    elif prompt == "cd DOCS":
+        currentdir = "C:\\natpunk\DOCS"
+        print(currentdir + "\n")
+    elif prompt == "cd":
+        currentdir = "C:\\natpunk"
+    elif prompt == "cd Dloads":
+        currentdir = "C:\\natpunk\Dloads"
+    elif prompt == "cd C:\\":
+        currentdir = "C:\\"
+    elif prompt == "cd DOS64":
+        currentdir = "C:\\DOS64"
+    elif prompt == "cd ..":
+        if currentdir == "C:\\natpunk":
+            currentdir = "C:\\"
+    elif prompt == "cd Sys":
+        currentdir = "C:\\Sys"
+    elif prompt == "cd sys32":
+        currentdir = "C:\\sys32"
+    elif prompt == "dir":
+        if currentdir == "C:\\natpunk":
+            os.system("dir_home.py")
+        elif currentdir == "C:\\natpunk\DOCS":
+            os.system("dir_home_docs.py")
+        elif currentdir == "C:\\natpunk\Dloads":
+            os.system("dir_home_dloads.py")
+        elif currentdir == "C:\\":
+            os.system("dir_c.py")
+        elif currentdir == "C:\\DOS64":
+            os.system("dir_c_dos64.py")
+        elif currentdir == "C:\\Sys":
+            os.system("dir_c_sys.py")
+        elif currentdir == "C:\\sys32":
+            print("NO_ACCSES")
+    elif prompt == "edit":
+        name = input("What do you want to edit?\n>> ")
+        os.system("nano " + name)
+    elif prompt == "task":
+        os.system("btop")
+    elif prompt == "dos64":
+        os.system("dos64menu.py")
+# lif prompt == "cd Dloads:
+# currentdir
