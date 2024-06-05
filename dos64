@@ -28,13 +28,11 @@ def execute(cmd, print_output=False, errors=True):
 dosstart = """
 <-----DOS 64------>
 A Thing Like DOS
-Support and Contripute at:
-trip.avery@gmail.com
 <=================>
 """
 login1 = "natpunk"
 login2 = "root"
-setuppass = "ta37"
+setuppass = "dos64"
 directory = "Home/"
 programs = "clear date logout"
 os.system("clear")
